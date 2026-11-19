@@ -91,3 +91,15 @@ def evaluate_ae_on_testset(
     latency_ms = measure_inference_latency_ms(lambda: model(dummy_batch), device=device)
 
     return metrics, latency_ms
+
+
+@torch.no_grad()
+def evaluate_gan_latency(
+    generator: nn.Module,
+    noise_dim: int,
+    device: torch.device,
+) -> float:
+    # Measures Generator inference latency for generating a batch of 64 images.
+    generator.to(device).eval()
+    dummy_z = torch.randn((64, noise_dim), device=device)
+    return measure_inference_latency_ms(lambda: generator(dummy_z), device=device)

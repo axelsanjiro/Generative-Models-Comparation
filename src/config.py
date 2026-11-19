@@ -3,18 +3,18 @@ import torch
 
 
 class Config:
-    # --- Reproducibility & Device ---
+    # Reproducibility & Device 
     SEED = 42
     DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-    # --- Paths ---
+    # Paths
     ROOT_DIR = Path(__file__).resolve().parent.parent
     DATA_DIR = ROOT_DIR / "data"
     CHECKPOINT_DIR = ROOT_DIR / "checkpoints"
     FIGURES_DIR = ROOT_DIR / "results" / "figures"
     METRICS_DIR = ROOT_DIR / "results" / "metrics"
 
-    # --- Dataset & DataLoader (Standardized 80/10/10 Split) ---
+    # Dataset & DataLoader (Standardized 80/10/10 Split)
     DATASET_NAME = "FashionMNIST"
     IMG_CHANNELS = 1
     IMG_SIZE = 28
@@ -34,7 +34,7 @@ class Config:
     EVAL_BATCH_SIZE = 64 
     NUM_WORKERS = 2
 
-    # --- Model 0: MLP Classifier & Frozen Decoder ---
+    # Model 0: MLP Classifier & Frozen Decoder
     MLP_HIDDEN_DIMS = [256, 64]
     MLP_LATENT_DIM = 64
     MLP_EPOCHS = 20
@@ -42,37 +42,37 @@ class Config:
     FROZEN_DECODER_EPOCHS = 25
     FROZEN_DECODER_LR = 1e-3
 
-    # --- Model 1: Vanilla Autoencoder ---
+    # Model 1: Vanilla Autoencoder 
     AE_LATENT_DIM = 64
     AE_EPOCHS = 30
     AE_LR = 1e-3
 
-    # --- Model 2: Sparse Autoencoder ---
+    # Model 2: Sparse Autoencoder 
     SPARSE_AE_HIDDEN_DIM = 256
     SPARSE_AE_LATENT_DIM = 64
     SPARSE_L1_LAMBDA = 1e-4
     SPARSE_AE_EPOCHS = 30
     SPARSE_AE_LR = 1e-3
 
-    # --- Model 3: Variational Autoencoder (VAE) ---
+    # Model 3: Variational Autoencoder (VAE)
     VAE_LATENT_DIM = 64
     VAE_KL_WEIGHT = 1.0
     VAE_EPOCHS = 30
     VAE_LR = 1e-3
 
-    # --- Model 4: Vanilla GAN (MLP) ---
+    # Model 4: Vanilla GAN (MLP) 
     VANILLA_GAN_NOISE_DIM = 100
     VANILLA_GAN_EPOCHS = 50
     VANILLA_GAN_LR = 2e-4
     GAN_BETAS = (0.5, 0.999)
 
-    # --- Model 5: Deep Convolutional GAN (DCGAN) ---
+    # Model 5: Deep Convolutional GAN (DCGAN) 
     DCGAN_NOISE_DIM = 100
     DCGAN_FEATURE_MAPS = 64
     DCGAN_EPOCHS = 50
     DCGAN_LR = 2e-4
 
-    # --- Model 6: Denoising Diffusion Probabilistic Model (DDPM) ---
+    # Model 6: Denoising Diffusion Probabilistic Model (DDPM) 
     DDPM_TIMESTEPS = 1000
     DDPM_BETA_START = 1e-4
     DDPM_BETA_END = 0.02
@@ -80,7 +80,7 @@ class Config:
     DDPM_EPOCHS = 30
     DDPM_LR = 2e-4
 
-    # --- Evaluation ---
+    # Evaluation 
     FID_NUM_SAMPLES = 2000 
 
     @classmethod
