@@ -10,6 +10,7 @@ from torchmetrics.functional.image import (
     structural_similarity_index_measure,
 )
 
+
 @torch.no_grad()
 def compute_reconstruction_metrics(preds: torch.Tensor, targets: torch.Tensor) -> Dict[str, float]:
     # Computes average pixel-wise MSE, PSNR (dB), and SSIM over image tensors in [0, 1].
@@ -103,3 +104,36 @@ def evaluate_gan_latency(
     generator.to(device).eval()
     dummy_z = torch.randn((64, noise_dim), device=device)
     return measure_inference_latency_ms(lambda: generator(dummy_z), device=device)
+
+
+from torchmetrics.image.fid import FrechetInceptionDistance
+
+
+@torch.no_grad()
+def compute_fid_score(
+    real_loader: DataLoader,
+    sample_fn: Callable[[int], torch.Tensor],
+    device: torch.device,
+    num_fake_samples: int = 1024,
+    batch_size: int = 128,
+) -> float:
+    # Computes Frechet Inception Distance (FID) between real Test Set images (7,000)
+    # and generated synthetic images in [0, 1].
+    fid = FrechetInceptionDistance(feature=2048, normalize=True).to(device)
+
+    # Feed real test set images
+    for x, _ in real_loader:
+        x_rgb = x.to(device).clamp(0.0, 1.0).repeat(1, 3, 1, 1)
+        fid.update(x_rgb, real=True)
+
+    # Feed synthetic images
+    generated = 0
+    while generated < num_fake_samples:
+        curr_bs = min(batch_size, num_fake_samples - generated)
+        fake_imgs = sample_fn(curr_bs).to(device).clamp(0.0, 1.0)
+        fake_rgb = fake_imgs.repeat(1, 3, 1, 1)
+        fid.update(fake_rgb, real=False)
+        generated += curr_bs
+
+    score = fid.compute().item()
+    return round(score, 4)
