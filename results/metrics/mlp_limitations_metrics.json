@@ -1,0 +1,13 @@
+{
+    "classifier_test_acc": 88.8857,
+    "frozen_decoder_metrics": {
+        "mse": 0.017125,
+        "psnr": 17.6636,
+        "ssim": 0.7124
+    },
+    "latent_stats": {
+        "mu_mean": 1.5177,
+        "sigma_mean": 1.8867,
+        "sparsity_zero_ratio": 0.561
+    }
+}

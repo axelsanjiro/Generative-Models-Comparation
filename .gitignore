@@ -1,0 +1,44 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Virtual environments
+.env
+.venv
+env/
+venv/
+ENV/
+
+# Jupyter Notebook & Google Colab checkpoints
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/*
+
+# Dataset & Model Checkpoints (ukuran besar, simpan di Google Drive saat run Colab)
+data/
+checkpoints/
+*.pth
+*.pt
+*.ckpt
+*.onnx
+
+# Keep folder structure in Git while ignoring contents
+!checkpoints/.gitkeep
+!data/.gitkeep
+!results/figures/.gitkeep
+!results/metrics/.gitkeep
+
+# Logs & temporary files
+logs/
+runs/
+wandb/
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
+
+# IDE / Editor settings
+.vscode/
+.idea/
+*.swp
