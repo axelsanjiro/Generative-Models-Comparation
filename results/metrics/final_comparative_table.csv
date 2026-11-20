@@ -1,0 +1,7 @@
+Arsitektur Model,Dim Laten,Training Time / Epoch (s),Latency (ms / batch 64),Test MSE,Test PSNR (dB),Test SSIM,FID Score,Kestabilan Training
+Vanilla Autoencoder CPU,64,8.1267,0.7173,0.008242,20.8399,0.836,N/A (Latent Voids),Stabil / Konvergen
+Sparse Autoencoder CPU,64 (L1=0.0001),11.8187,0.5817,0.008236,20.8431,0.8356,N/A (Latent Voids),Stabil / Konvergen
+Variational Autoencoder (VAE) CPU,64,13.2806,0.8303,0.015321,18.147,0.7416,95.9605,Stabil / Konvergen
+Vanilla GAN (MLP) CPU,100,24.0782,4.3593,N/A (Tanpa Encoder),N/A,N/A,142.0776,Rentan Osilasi / Mode Collapse
+Deep Convolutional GAN (DCGAN) CPU,100,195.65,41.1728,N/A (Tanpa Encoder),N/A,N/A,29.6447,Cukup Stabil (Sensitif Arsitektur)
+"DDPM (U-Net, T=1000) T4 GPU",28x28 (Dimensi Citra),44.7284,16435.8387,N/A (Denoising Model),N/A,N/A,34.0873,Sangat Stabil
