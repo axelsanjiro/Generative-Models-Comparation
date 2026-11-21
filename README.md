@@ -41,9 +41,7 @@ merekonstruksi maupun men-generate citra.
 │   └── 08_comparative_eval_and_figures.ipynb / 08_colab.ipynb   # FID, tabel komparatif, 5 figur
 ├── results/
 │   ├── metrics/                # *_results.json per model, mlp_limitations_metrics.json, final_comparative_table.csv
-│   └── figures/                # fig1–fig5 (PNG)
-├── report/
-│   └── build_report.py         # Membangun laporan DOCX dari results/
+│   └── figures/                
 ├── checkpoints/                # Bobot model (.pth), tidak di-commit (lihat .gitignore)
 ├── data/                       # Diunduh otomatis oleh torchvision, tidak di-commit
 └── requirements.txt
@@ -55,7 +53,6 @@ merekonstruksi maupun men-generate citra.
 
    ```bash
    python -m venv .venv
-   # Windows: .venv\Scripts\activate   |   Linux/macOS: source .venv/bin/activate
    pip install -r requirements.txt
    ```
 
@@ -68,14 +65,6 @@ merekonstruksi maupun men-generate citra.
      dijalankan di GPU. Versi `07_colab.ipynb` dan `08_colab.ipynb` disiapkan untuk Google Colab.
    - Notebook `08` membutuhkan seluruh checkpoint dari `01`–`07`.
 
-3. (Opsional) Bangun laporan DOCX dari hasil eksperimen:
-
-   ```bash
-   pip install python-docx
-   python report/build_report.py
-   ```
-
-   Isi variabel `NAMA`, `NIM`, dan `KELAS` di `report/build_report.py` terlebih dahulu.
 
 ## Konfigurasi Model
 
@@ -143,8 +132,3 @@ dibanding protokol 10.000+ sampel; urutan peringkat antarmodel tetap informatif.
 - **MLP Classifier:** model P(y | x) dengan akurasi 88,89% tetap tidak memuat model P(x). Bobot transposnya
   tidak membentuk citra, fitur latennya menggandakan MSE rekonstruksi, dan ruang latennya tidak dapat di-sampling.
 
-## Laporan
-
-Laporan lengkap (landasan teori, formulasi loss, analisis lima figur, serta jawaban Q1–Q6 dan rekomendasi
-industri) dibangun oleh `report/build_report.py` menjadi
-`report/TUGAS_DL_SESI07_[NIM]_[NAMA_LENGKAP].docx`, lalu diekspor ke PDF untuk pengumpulan.
